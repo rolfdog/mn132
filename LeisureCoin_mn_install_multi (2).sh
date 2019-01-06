@@ -6,11 +6,12 @@ echo "Done installing";
 
 echo "Setting up swap space";
 
-dd if=/dev/zero of=/swapfile bs=1M count=4096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+dd if=/dev/zero of=/swapfile bs=1M count=40096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 
 echo "Setting up user accounts";
 
 useradd -m -s /bin/bash mn1 && useradd -m -s /bin/bash mn2 && useradd -m -s /bin/bash mn3 && useradd -m -s /bin/bash mn4 && usermod -aG sudo mn1 && usermod -aG sudo mn2 && usermod -aG sudo mn3 && usermod -aG sudo mn4
+useradd -m -s /bin/bash mn5 && useradd -m -s /bin/bash mn6 && useradd -m -s /bin/bash mn7 && useradd -m -s /bin/bash mn8 && usermod -aG sudo mn5 && usermod -aG sudo mn6 && usermod -aG sudo mn7 && usermod -aG sudo mn8
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -34,6 +35,26 @@ RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
 PORT4=9339
 RPCPORT4=9340
 
+RPCUSR4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
+RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
+PORT4=9341
+RPCPORT4=9342
+
+RPCUSR4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
+RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
+PORT4=9343
+RPCPORT4=9344
+
+RPCUSR4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
+RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
+PORT4=9345
+RPCPORT4=9346
+
+RPCUSR4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
+RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
+PORT4=9347
+RPCPORT4=9348
+
 echo "Installing masternode 1";
 
 cd /home/mn1 && mkdir .LeisureCoin && chmod -R 777 .LeisureCoin
@@ -54,14 +75,22 @@ cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn1 && chmod -R 777 /home/m
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn2 && chmod -R 777 /home/mn2/LeisureCoin-cli && chmod -R 777 /home/mn2/LeisureCoind && chmod -R 777 /home/mn2/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn3 && chmod -R 777 /home/mn3/LeisureCoin-cli && chmod -R 777 /home/mn3/LeisureCoind && chmod -R 777 /home/mn3/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn4 && chmod -R 777 /home/mn4/LeisureCoin-cli && chmod -R 777 /home/mn4/LeisureCoind && chmod -R 777 /home/mn4/LeisureCoin-tx
+cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn5 && chmod -R 777 /home/mn5/LeisureCoin-cli && chmod -R 777 /home/mn5/LeisureCoind && chmod -R 777 /home/mn5/LeisureCoin-tx
+cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn6 && chmod -R 777 /home/mn6/LeisureCoin-cli && chmod -R 777 /home/mn6/LeisureCoind && chmod -R 777 /home/mn6/LeisureCoin-tx
+cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn7 && chmod -R 777 /home/mn7/LeisureCoin-cli && chmod -R 777 /home/mn7/LeisureCoind && chmod -R 777 /home/mn7/LeisureCoin-tx
+cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn8 && chmod -R 777 /home/mn8/LeisureCoin-cli && chmod -R 777 /home/mn8/LeisureCoind && chmod -R 777 /home/mn8/LeisureCoin-tx
 
 su - mn1 -c './LeisureCoind -daemon'
 sleep 20
 
 KEY1=$(su - mn1 -c './LeisureCoin-cli masternode genkey')
-KEY2=$(su - mn1 -c './LeisureCoin-cli masternode genkey')
-KEY3=$(su - mn1 -c './LeisureCoin-cli masternode genkey')
-KEY4=$(su - mn1 -c './LeisureCoin-cli masternode genkey')
+KEY2=$(su - mn2 -c './LeisureCoin-cli masternode genkey')
+KEY3=$(su - mn3 -c './LeisureCoin-cli masternode genkey')
+KEY4=$(su - mn4 -c './LeisureCoin-cli masternode genkey')
+KEY5=$(su - mn5 -c './LeisureCoin-cli masternode genkey')
+KEY6=$(su - mn6 -c './LeisureCoin-cli masternode genkey')
+KEY7=$(su - mn7 -c './LeisureCoin-cli masternode genkey')
+KEY8=$(su - mn8 -c './LeisureCoin-cli masternode genkey')
 
 su - mn1 -c './LeisureCoin-cli stop'
 echo "will wait 60 seconds..";
