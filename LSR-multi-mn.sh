@@ -318,28 +318,34 @@ EOF
 
 echo "Starting LeisureCoin clients";
 cd /root
-rm LeisureCoin_mn_install_multi.sh
+rm LSR-multi-mn.sh
 rm LeisureCoind
 rm LeisureCoin-cli
 rm LeisureCoin-tx
 rm leisure_mn.zip
 su - mn1 -c './LeisureCoind'
-su - mn2 -c './LeisureCoind'
-su - mn3 -c './LeisureCoind'
-su - mn4 -c './LeisureCoind'
-su - mn5 -c './LeisureCoind'
-su - mn6 -c './LeisureCoind'
-su - mn7 -c './LeisureCoind'
-su - mn8 -c './LeisureCoind'
-sleep 100
-
+sleep 20
 cpulimit -c 2 -P /home/mn1/LeisureCoind -l 1 -b
+su - mn2 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn2/LeisureCoind -l 1 -b
+su - mn3 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn3/LeisureCoind -l 1 -b
+su - mn4 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn4/LeisureCoind -l 1 -b
+su - mn5 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn5/LeisureCoind -l 1 -b
+su - mn6 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn6/LeisureCoind -l 1 -b
+su - mn7 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn7/LeisureCoind -l 1 -b
+su - mn8 -c './LeisureCoind'
+sleep 20
 cpulimit -c 2 -P /home/mn8/LeisureCoind -l 1 -b
 
 echo "
