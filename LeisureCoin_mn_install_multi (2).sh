@@ -1,12 +1,12 @@
 echo "Installing required packages";
 
-add-apt-repository ppa:bitcoin/bitcoin && apt-get -y update && apt-get -y install libboost-all-dev libcrypto++-dev libqrencode-dev libminiupnpc-dev libgmp-dev libgmp3-dev autoconf autogen automake bsdmainutils libzmq3-dev libminiupnpc-dev libevent-dev libdb4.8-dev libdb4.8++-dev unzip
+add-apt-repository ppa:bitcoin/bitcoin && apt-get install cpulimit && apt-get -y update && apt-get -y install libboost-all-dev libcrypto++-dev libqrencode-dev libminiupnpc-dev libgmp-dev libgmp3-dev autoconf autogen automake bsdmainutils libzmq3-dev libminiupnpc-dev libevent-dev libdb4.8-dev libdb4.8++-dev unzip
 
 echo "Done installing";
 
 echo "Setting up swap space";
 
-dd if=/dev/zero of=/swapfile bs=1M count=40096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+dd if=/dev/zero of=/swapfile bs=1M count=80096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 
 echo "Setting up user accounts";
 
@@ -70,7 +70,7 @@ daemon=1
 port=$PORT1
 EOF
 
-cd /root && wget https://github.com/LeisureCoinProject/LeisureCoin-Core-Masternode/releases/download/v1.0/leisure_mn.zip && unzip leisure_mn.zip
+cd /root && wget https://github.com/LeisureCoinProject/LeisureCoin-Core-Masternode/releases/download/v2.0/leisure_mn.zip && unzip leisure_mn.zip
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn1 && chmod -R 777 /home/mn1/LeisureCoin-cli && chmod -R 777 /home/mn1/LeisureCoind && chmod -R 777 /home/mn1/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn2 && chmod -R 777 /home/mn2/LeisureCoin-cli && chmod -R 777 /home/mn2/LeisureCoind && chmod -R 777 /home/mn2/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn3 && chmod -R 777 /home/mn3/LeisureCoin-cli && chmod -R 777 /home/mn3/LeisureCoind && chmod -R 777 /home/mn3/LeisureCoin-tx
@@ -101,7 +101,16 @@ bind=$NODEIP:$PORT1
 gen=1
 masternode=1
 masternodeprivkey=$KEY1
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT1
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 2";
@@ -121,7 +130,16 @@ bind=$NODEIP:$PORT2
 gen=1
 masternode=1
 masternodeprivkey=$KEY2
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT2
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 3";
@@ -141,7 +159,16 @@ bind=$NODEIP:$PORT3
 gen=1
 masternode=1
 masternodeprivkey=$KEY3
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT3
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 4";
@@ -161,7 +188,132 @@ bind=$NODEIP:$PORT4
 gen=1
 masternode=1
 masternodeprivkey=$KEY4
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT4
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
+EOF
+
+echo "Installing masternode 5";
+
+cd /home/mn5 && mkdir .LeisureCoin && chmod -R 777 .LeisureCoin
+
+cat << EOF > /home/mn5/.LeisureCoin/LeisureCoin.conf
+rpcuser=$RPCUSR5
+rpcpassword=$RPCPW5
+rpcport=$RPCPORT5
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+port=$PORT5
+bind=$NODEIP:$PORT5
+gen=1
+masternode=1
+masternodeprivkey=$KEY5
+externalip=$NODEIP:$PORT5
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
+EOF
+
+echo "Installing masternode 6";
+
+cd /home/mn6 && mkdir .LeisureCoin && chmod -R 777 .LeisureCoin
+
+cat << EOF > /home/mn6/.LeisureCoin/LeisureCoin.conf
+rpcuser=$RPCUSR6
+rpcpassword=$RPCPW6
+rpcport=$RPCPORT6
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+port=$PORT6
+bind=$NODEIP:$PORT6
+gen=1
+masternode=1
+masternodeprivkey=$KEY6
+externalip=$NODEIP:$PORT6
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
+EOF
+
+echo "Installing masternode 7";
+
+cd /home/mn7 && mkdir .LeisureCoin && chmod -R 777 .LeisureCoin
+
+cat << EOF > /home/mn7/.LeisureCoin/LeisureCoin.conf
+rpcuser=$RPCUSR7
+rpcpassword=$RPCPW7
+rpcport=$RPCPORT7
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+port=$PORT7
+bind=$NODEIP:$PORT7
+gen=1
+masternode=1
+masternodeprivkey=$KEY7
+externalip=$NODEIP:$PORT7
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
+EOF
+
+echo "Installing masternode 8";
+
+cd /home/mn8 && mkdir .LeisureCoin && chmod -R 777 .LeisureCoin
+
+cat << EOF > /home/mn8/.LeisureCoin/LeisureCoin.conf
+rpcuser=$RPCUSR8
+rpcpassword=$RPCPW8
+rpcport=$RPCPORT8
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+port=$PORT8
+bind=$NODEIP:$PORT8
+gen=1
+masternode=1
+masternodeprivkey=$KEY8
+externalip=$NODEIP:$PORT8
+addnode=91.121.209.203
+addnode=144.202.59.174
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169
+addnode=45.32.44.136
+addnode=194.182.82.199
 EOF
 
 echo "Starting LeisureCoin clients";
@@ -175,7 +327,21 @@ su - mn1 -c './LeisureCoind'
 su - mn2 -c './LeisureCoind'
 su - mn3 -c './LeisureCoind'
 su - mn4 -c './LeisureCoind'
-sleep 5
+su - mn5 -c './LeisureCoind'
+su - mn6 -c './LeisureCoind'
+su - mn7 -c './LeisureCoind'
+su - mn8 -c './LeisureCoind'
+sleep 100
+
+cpulimit -c 2 -P /home/mn1/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn2/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn3/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn4/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn5/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn6/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn7/LeisureCoind -l 1 -b
+cpulimit -c 2 -P /home/mn8/LeisureCoind -l 1 -b
+
 echo "
 
 *** Your LeisureCoin masternodes are now installed. Please wait for the wallets to be fully synced. ***
@@ -183,9 +349,6 @@ echo "
 *** You can get the current block height with: 
 
 Masternode 1: su - mn1 -c './LeisureCoin-cli getblockcount'
-Masternode 2: su - mn2 -c './LeisureCoin-cli getblockcount'
-Masternode 3: su - mn3 -c './LeisureCoin-cli getblockcount'
-Masternode 4: su - mn4 -c './LeisureCoin-cli getblockcount'
 
 ***
 
@@ -195,13 +358,14 @@ Masternode 1: MN1 $NODEIP:$PORT1 $KEY1 txid index
 Masternode 2: MN2 $NODEIP:$PORT2 $KEY2 txid index
 Masternode 3: MN3 $NODEIP:$PORT3 $KEY3 txid index
 Masternode 4: MN4 $NODEIP:$PORT4 $KEY4 txid index
+Masternode 5: MN5 $NODEIP:$PORT5 $KEY5 txid index
+Masternode 6: MN6 $NODEIP:$PORT6 $KEY6 txid index
+Masternode 7: MN7 $NODEIP:$PORT7 $KEY7 txid index
+Masternode 8: MN8 $NODEIP:$PORT8 $KEY8 txid index
 
 *** Start your masternode from your wallet and check the status with:
 
 Masternode 1: su - mn1 -c './LeisureCoin-cli masternode status'
-Masternode 2: su - mn2 -c './LeisureCoin-cli masternode status'
-Masternode 3: su - mn3 -c './LeisureCoin-cli masternode status'
-Masternode 4: su - mn4 -c './LeisureCoin-cli masternode status' 
 
 ***";
 
